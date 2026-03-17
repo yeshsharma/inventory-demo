@@ -31,6 +31,7 @@ jobs:
 
       - name: Run REST Assured Tests
         run: mvn test
+        working-directory: MySpaCover
         continue-on-error: true # pipeline won't stop even if tests fail
 
       - name: Upload Extent Report
@@ -38,5 +39,4 @@ jobs:
         if: always() # upload report whether tests pass or fail
         with:
           name: extent-report
-          path: test-output/ # change this to wherever your extent report generates
-
+          path: MySpaCover/test-output/
