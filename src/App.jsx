@@ -4,6 +4,8 @@ import LoginPage from "./pages/LoginPage";
 import Orders from "../src/components/Dashboard/Orders";
 
 import { useAuth } from "./context/AuthContext";
+import DriverShipmentApp from "./components/Dashboard/Inventorydashtest";
+import MultiAccountComments from "./components/Dashboard/MultiAccountComments";
 
 const App = () => {
   const { isAuthenticated } = useAuth();
@@ -13,6 +15,12 @@ const App = () => {
       <Routes>
         {/* If not logged in → show login */}
         {!isAuthenticated && <Route path="*" element={<LoginPage />} />}
+        {!isAuthenticated && (
+          <Route path="/live" element={<DriverShipmentApp />} />
+        )}
+        {!isAuthenticated && (
+          <Route path="/comment" element={<MultiAccountComments />} />
+        )}
 
         {/* If logged in → allow dashboard + orders */}
         {isAuthenticated && (

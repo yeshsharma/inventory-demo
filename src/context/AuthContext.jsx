@@ -8,7 +8,7 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = React.useState(true);
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     initializeAuth();
   }, []);
 
