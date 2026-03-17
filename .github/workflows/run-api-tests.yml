@@ -2,9 +2,8 @@ name: Run API Tests on Staging Push
 
 "on":
 env: FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-  push:
-    branches:
-      - main
+push:
+branches: - main
 
 jobs:
   run-api-tests:
