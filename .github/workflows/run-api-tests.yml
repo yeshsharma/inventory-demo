@@ -3,7 +3,7 @@ name: Run API Tests on Staging Push
 "on":
   push:
     branches:
-      - main
+      - staging
 
 jobs:
   run-api-tests:
@@ -16,6 +16,7 @@ jobs:
           repository: yeshsharma/MySpaCover
           token: ${{ secrets.TEST_REPO_SECRET }}
           path: MySpaCover
+          ref: ofc-newtestcasesUpdation
 
       - name: Debug - Show folder structure
         run: |
@@ -23,6 +24,8 @@ jobs:
           ls -la
           echo "MySpaCover contents:"
           ls -la MySpaCover/
+          echo "Finding pom.xml:"
+          find . -name "pom.xml"
 
       - name: Set up Java 17
         uses: actions/setup-java@v4
