@@ -14,9 +14,6 @@ const Dashboard = () => {
 
   const navigate = useNavigate();
   // Fetch inventory data when component mounts
-  useEffect(() => {
-    fetchInventory();
-  }, []);
 
   const fetchInventory = async () => {
     setLoading(true);
@@ -33,6 +30,9 @@ const Dashboard = () => {
     setLoading(false);
   };
 
+  useEffect(() => {
+    fetchInventory();
+  }, []);
   // Handle edit action
   const handleEdit = (item) => {
     setEditingItem(item);
@@ -103,7 +103,7 @@ const Dashboard = () => {
           Total Quantity:{" "}
           {inventory.reduce(
             (sum, item) => sum + parseInt(item.quantity || 0),
-            0
+            0,
           )}
         </p>
       </div>
