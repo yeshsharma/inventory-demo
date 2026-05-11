@@ -1,0 +1,7 @@
+version: "3.8"
+services:
+  react-app:
+    build: .
+    ports:
+      - "3000:80" # Your Mac port 3000 → container port 80
+    restart: unless-stopped
