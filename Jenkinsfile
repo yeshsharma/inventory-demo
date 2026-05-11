@@ -30,7 +30,7 @@ pipeline {
             steps {
                 sh 'docker stop inventory-demo-container || true'
                 sh 'docker rm inventory-demo-container || true'
-                sh 'docker run -d -p 3000:3000 --name inventory-demo-container inventory-demo'
+                sh 'docker run -d -p 3000:80 --name inventory-demo-container inventory-demo'
             }
         }
     }
