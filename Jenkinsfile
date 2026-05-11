@@ -2,43 +2,25 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+
+        stage('Clone Repository') {
             steps {
-                echo '📦 Checking out code...'
-                git branch: 'main', url: 'https://github.com/yeshsharma/inventory-demo.git
+                git 'https://github.com/yeshsharma/inventory-demo.git'
             }
         }
 
-        stage('Cleanup Old Images') {
+        stage('Build Docker Image') {
             steps {
-                echo '🧹 Cleaning up old Docker images...'
-                sh 'docker system prune -af || true'
-                // "|| true" means: even if this fails, continue (don't break the build)
+                sh 'docker build -t inventory-demo .'
             }
         }
 
-        stage('Build') {
+        stage('Run Container') {
             steps {
-                echo '🛠️ Building Docker image...'
-                sh 'docker compose build'
+                sh 'docker stop inventory-demo-container || true'
+                sh 'docker rm inventory-demo-container || true'
+                sh 'docker run -d -p 3000:3000 --name inventory-demo-container inventory-demo'
             }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo '🚀 Deploying...'
-                sh 'docker compose down || true'   // Stop old containers
-                sh 'docker compose up -d'          // Start new ones
-            }
-        }
-    }
-
-    post {
-        success {
-            echo '✅ Deployed successfully! Visit http://localhost:3000'
-        }
-        failure {
-            echo '❌ Build failed. Check logs above.'
         }
     }
 }
