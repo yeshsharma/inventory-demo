@@ -5,7 +5,7 @@ pipeline {
 
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/yeshsharma/inventory-demo.git'
+                git branch: 'main', url: 'https://github.com/yeshsharma/inventory-demo.git'
             }
         }
 
